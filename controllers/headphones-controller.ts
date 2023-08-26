@@ -20,8 +20,8 @@ export const index = async (req: Request, res: Response) => {
 
 export const post = async (req: Request, res: Response) => {
 	try {
-		const { title, img, price, rate } = req.body;
-		const headphoneItem = { title, img, price, rate };
+		const { title, img, price, rate, type } = req.body;
+		const headphoneItem = { title, img, price, rate, type };
 		const response = new headphone(headphoneItem);
 		await response.save();
 		res.json({
@@ -32,6 +32,21 @@ export const post = async (req: Request, res: Response) => {
 		res.json({
 			message: "error",
 			data: JSON.stringify(error),
+		});
+	}
+};
+
+export const deleteAll = async (req: Request, res: Response) => {
+	try {
+		await headphone.deleteMany({});
+		res.json({
+			message: "sucess",
+			data: "All headphones has been deleted",
+		});
+	} catch (error) {
+		res.status(403).json({
+			message: "Cannot delete all headphones",
+			data: error,
 		});
 	}
 };

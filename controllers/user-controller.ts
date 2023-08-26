@@ -106,7 +106,7 @@ export const refresh = async (req: Request, res: Response) => {
 			data: { ...user, accessToken },
 		});
 	} catch (error) {
-		res.status(403).json({
+		res.status(401).json({
 			message: "error",
 			data: "Unauthorized",
 		});
