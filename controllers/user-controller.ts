@@ -61,9 +61,8 @@ export const login = async (req: Request, res: Response) => {
 			data: { ...user, accessToken },
 		});
 	} catch (error) {
-		res.json({
-			message: "error",
-			data: JSON.stringify(error),
+		res.status(400).json({
+			message: error.message,
 		});
 	}
 };
